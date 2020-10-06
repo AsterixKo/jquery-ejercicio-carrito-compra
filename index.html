@@ -1,17 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carrito de la compra</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
+    <div id="compra" class="compra-container">
+        <div class="compra-internal">
+            <h1>Compra tus productos</h1>
+            <form>
+                <label class="input-labels"><input type="checkbox" id="cbox1" value="first_checkbox"> Chocolate</label><br>
+                <p>Cantidad:</p>
+                <input type="number" id="cantidad1" value="0" min="0" /><br>
+                <p>Precio:</p>
+                <input id="precio1" disabled value="3" />€<br><br>
+    
+                <label class="input-labels"><input type="checkbox" id="cbox2" value="second_checkbox"> Chicles</label><br>
+                <p>Cantidad:</p>
+                <input type="number" id="cantidad2" value="0" min="0" /><br>
+                <p>Precio:</p>
+                <input id="precio2" disabled value="2" />€<br><br>
+    
+                <label class="input-labels"><input type="checkbox" id="cbox3" value="third_checkbox"> Caramelos</label><br>
+                <p>Cantidad:</p>
+                <input type="number" id="cantidad3" value="0" min="0" /><br>
+                <p>Precio:</p>
+                <input id="precio3" disabled value="5" />€<br><br>
+    
+                <button type="button" onclick="comprar();">Comprar</button>
+            </form>
+        </div>
+    </div>
 
 
 
     <!-- https://developers.google.com/speed/libraries/#jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function comprar() {
+            console.log('Comprando...');
+            let precioTotal = 0;
+            let cantidad1 = 0;
+            let cantidad2 = 0;
+            let cantidad3 = 0;
+            let precio1 = 0;
+            let precio2 = 0;
+            let precio3 = 0;
+            // const cbox1 = $('#cbox1').is(":checked");
+
+            if ($('#cbox1').is(":checked")) { //ha comprado chocolate
+                console.log('cantidad1:', parseInt($('#cantidad1').val()));
+                cantidad1 = parseInt($('#cantidad1').val());
+                precio1 = parseInt($('#precio1').val());
+                precioTotal = precioTotal + (cantidad1 * precio1);
+                console.log('precioTotal:', precioTotal);
+                // console.log($('#cantidad1').val());
+                // console.log($('#precio1'));
+            }
+            if ($('#cbox2').is(":checked")) { //ha comprado chocolate
+                console.log('cantidad2:', parseInt($('#cantidad2').val()));
+                cantidad2 = parseInt($('#cantidad2').val());
+                precio2 = parseInt($('#precio2').val());
+                precioTotal = precioTotal + (cantidad2 * precio2);
+                console.log('precioTotal:', precioTotal);
+            }
+            if ($('#cbox3').is(":checked")) { //ha comprado chocolate
+                console.log('cantidad3:', parseInt($('#cantidad3').val()));
+                cantidad3 = parseInt($('#cantidad3').val());
+                precio3 = parseInt($('#precio3').val());
+                precioTotal = precioTotal + (cantidad3 * precio3);
+                console.log('precioTotal:', precioTotal);
+            }
+            let divConfirmacion = `<div id="confirmacion"><h1>Confirma tu compra</h1>`;
+                if($('#cbox1').is(":checked")){
+                    divConfirmacion = divConfirmacion + `<h2 class="producto-confirmado-titulo">Chocolate</h2>`;
+                    divConfirmacion = divConfirmacion + `<p class="producto-confirmado-cuenta-individual">${cantidad1} * ${precio1} = ${cantidad1 * precio1} euros</p><br><br>`;
+                }
+                if($('#cbox2').is(":checked")){
+                    divConfirmacion = divConfirmacion + `<h2 class="producto-confirmado-titulo">Chicles</h2>`;
+                    divConfirmacion = divConfirmacion + `<p class="producto-confirmado-cuenta-individual">${cantidad2} * ${precio2} = ${cantidad2 * precio2} euros</p><br><br>`;
+                }
+                if($('#cbox3').is(":checked")){
+                    divConfirmacion = divConfirmacion + `<h2 class="producto-confirmado-titulo">Caramelos</h2>`;
+                    divConfirmacion = divConfirmacion + `<p class="producto-confirmado-cuenta-individual">${cantidad3} * ${precio3} = ${cantidad3 * precio3} euros</p><br><br>`;
+                }
+                
+                divConfirmacion = divConfirmacion + `</div>`;
+            // $('body').append(`<div id="confirmacion"><h1>Confirma tu compra</h1></div>`);
+            $('#compra').remove();
+            $('body').append(divConfirmacion);
+        }
+    </script>
+
     <script src="js/index.js"></script>
 </body>
+
 </html>
